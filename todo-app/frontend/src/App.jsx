@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className='bg-indigo-100 min-h-screen'>
-      <h1 className='text-5xl text-center'>Hello world</h1>
+      <h1 className='text-5xl text-center'>Hello worl</h1>
 
     </div>
   )
