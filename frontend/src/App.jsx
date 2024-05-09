@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import './App.css'
+import TodoForm from './components/TodoForm'
+import { Table } from './components/Table'
+
 
 function App() {
 
@@ -8,7 +11,8 @@ function App() {
       <nav className='pt-8'>
       <h1 className='text-5xl text-center'>Todo Lists</h1>
       </nav>
-
+      <TodoForm/>
+      <Table/>
     </div>
   )
 }
