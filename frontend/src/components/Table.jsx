@@ -2,7 +2,7 @@ import React from 'react'
 import { MdOutlineDeleteSweep, MdCheckBoxOutlineBlank, MdCheckBox, MdEditNote, MdOutlineCheckBoxOutlineBlank  } from "react-icons/md";
 
 
-export const Table = () => {
+export const Table = ({todo, setTodo, isLoading}) => {
   return (
     <div className='py-8'>
       <table className='w-11/12 max-w-4x1'>
@@ -18,11 +18,15 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+        {isLoading ? <div>Is Loading</div> :
+        <> 
+        {todo.map((todoItem, index) =>{
+          return (
+            <tr key={todoItem.id}className='border-b border-black'>
             <th className='p-3 text-sm'>
               <span className='inline-block cursor-pointer'><MdCheckBox/></span>
             </th>
-            <th className='p-3 text-sm'>Task1</th>
+            <th className='p-3 text-sm'>{todoItem.body}</th>
             <th className='p-3 text-sm'>
               <span className='p-1.5 text-xs font-medium tracking-wider bg-green-300 rounded-md'>Done</span>
             </th>
@@ -33,66 +37,10 @@ export const Table = () => {
             </th>
 
           </tr>
-          <tr>
-            <th className='p-3 text-sm'>
-              <span className='inline-block cursor-pointer'><MdCheckBox/></span>
-            </th>
-            <th className='p-3 text-sm'>Task1</th>
-            <th className='p-3 text-sm'>
-              <span className='p-1.5 text-xs font-medium tracking-wider bg-green-300 rounded-md'>Done</span>
-            </th>
-            <th className='p-3 text-sm'>22-08-2024</th>
-            <th className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
-            <span className='text-xl cursor-pointer'><MdEditNote/></span>
-            <span className='text-xl inline-block cursor-pointer'><MdOutlineDeleteSweep/></span>
-            </th>
+          )
+        })}</> }
+      
 
-          </tr>
-          <tr>
-            <th className='p-3 text-sm'>
-              <span className='inline-block cursor-pointer'><MdCheckBox/></span>
-            </th>
-            <th className='p-3 text-sm'>Task1</th>
-            <th className='p-3 text-sm'>
-              <span className='p-1.5 text-xs font-medium tracking-wider bg-green-300 rounded-md'>Done</span>
-            </th>
-            <th className='p-3 text-sm'>22-08-2024</th>
-            <th className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
-            <span className='text-xl cursor-pointer'><MdEditNote/></span>
-            <span className='text-xl inline-block cursor-pointer'><MdOutlineDeleteSweep/></span>
-            </th>
-
-          </tr>
-          <tr>
-            <th className='p-3 text-sm'>
-              <span className='inline-block cursor-pointer'><MdCheckBox/></span>
-            </th>
-            <th className='p-3 text-sm'>Task1</th>
-            <th className='p-3 text-sm'>
-              <span className='p-1.5 text-xs font-medium tracking-wider bg-green-300 rounded-md'>Done</span>
-            </th>
-            <th className='p-3 text-sm'>22-08-2024</th>
-            <th className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
-            <span className='text-xl cursor-pointer'><MdEditNote/></span>
-            <span className='text-xl inline-block cursor-pointer'><MdOutlineDeleteSweep/></span>
-            </th>
-
-          </tr>
-          <tr>
-            <th className='p-3 text-sm'>
-              <span className='inline-block cursor-pointer'><MdCheckBox/></span>
-            </th>
-            <th className='p-3 text-sm'>Task1</th>
-            <th className='p-3 text-sm'>
-              <span className='p-1.5 text-xs font-medium tracking-wider bg-green-300 rounded-md'>Done</span>
-            </th>
-            <th className='p-3 text-sm'>22-08-2024</th>
-            <th className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
-            <span className='text-xl cursor-pointer'><MdEditNote/></span>
-            <span className='text-xl inline-block cursor-pointer'><MdOutlineDeleteSweep/></span>
-            </th>
-
-          </tr>
         </tbody>
       </table>
     </div>
