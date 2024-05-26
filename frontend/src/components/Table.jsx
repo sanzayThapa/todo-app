@@ -3,7 +3,7 @@ import { MdOutlineDeleteSweep, MdCheckBoxOutlineBlank, MdCheckBox, MdOutlineChec
 
 export const Table = ({todo, setTodo, isLoading}) => {
   return (
-    <div className='py-8'>
+    <div className='py-8 flex justify-center'>
       <table className='w-11/12 max-w-4xl'>
         <thead className='border-b-2 border-black'>
           <tr>
