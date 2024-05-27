@@ -1,7 +1,25 @@
+import axios from 'axios';
 import React from 'react';
 import { MdOutlineDeleteSweep, MdCheckBoxOutlineBlank, MdCheckBox, MdOutlineCheckBox, MdEditNote, MdOutlineCheckBoxOutlineBlank  } from "react-icons/md";
 
 export const Table = ({todo, setTodo, isLoading}) => {
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/todo/${id}/`);
+      const newList = todo.filter(todo => todo.id !== id)
+      setTodo(newList)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
+
+
+
+
+
   return (
     <div className='py-8 flex justify-center'>
       <table className='w-11/12 max-w-4xl'>
@@ -34,7 +52,7 @@ export const Table = ({todo, setTodo, isLoading}) => {
                 <td className='p-3 text-sm'>{new Date(todoItem.created).toLocaleString()}</td>
                 <td className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
                   <span className='text-xl cursor-pointer'><MdEditNote/></span>
-                  <span className='text-xl inline-block cursor-pointer'><MdOutlineDeleteSweep/></span>
+                  <span className='text-xl inline-block cursor-pointer'><MdOutlineDeleteSweep onClick={ () => handleDelete(todoItem.id)}/></span>
                 </td>
               </tr>
             ))
