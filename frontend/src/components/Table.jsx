@@ -14,6 +14,22 @@ export const Table = ({todo, setTodo, isLoading}) => {
     }
   };
   
+  const handleEdit = async (id,value) =>{
+    try{
+      const response = await axios.patch(`http://localhost:8000/api/todo/${id}/`, value)
+      const newTodo = todo.map(todo => todo.id === id ? response.data : todo)
+      setTodo(newTodo)
+
+    }catch(error){
+      console.log(error)
+    }
+
+  };
+  const handleCheckbox = (id,value) =>{
+    handleEdit(id,{
+      'completed': !value
+    })
+  }
 
 
 
@@ -41,7 +57,7 @@ export const Table = ({todo, setTodo, isLoading}) => {
             todo.map((todoItem) => (
               <tr key={todoItem.id} className='border-b border-black'>
                 <td className='p-3 text-sm' title={todoItem.id}>
-                  <span className='inline-block cursor-pointer'>{todoItem.completed ? <MdOutlineCheckBox/> : <MdOutlineCheckBoxOutlineBlank/>}</span>
+                  <span onClick={() => handleCheckbox(todoItem.id,todoItem.completed)} className='inline-block cursor-pointer'>{todoItem.completed ? <MdOutlineCheckBox/> : <MdOutlineCheckBoxOutlineBlank/>}</span>
                 </td>
                 <td className='p-3 text-sm'>{todoItem.body}</td>
                 <td className='p-3 text-sm text-center'>
