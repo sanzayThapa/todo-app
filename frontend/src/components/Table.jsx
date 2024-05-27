@@ -49,47 +49,49 @@ export const Table = ({ todo, setTodo, isLoading }) => {
 
   return (
     <div className='py-8 flex justify-center'>
-      <table className='w-11/12 max-w-4xl'>
-        <thead className='border-b-2 border-black'>
-          <tr>
-            <th className='p-3 text-sm font-semibold tracking-wide text-left'>Checkbox</th>
-            <th className='p-3 text-sm font-semibold tracking-wide text-left'>To Do</th>
-            <th className='p-3 text-sm font-semibold tracking-wide text-left'>Status</th>
-            <th className='p-3 text-sm font-semibold tracking-wide text-left'>Date Created</th>
-            <th className='p-3 text-sm font-semibold tracking-wide text-left'>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {isLoading ? (
+      <div className='w-11/12 max-w-4xl overflow-x-auto'>
+        <table className='min-w-full'>
+          <thead className='border-b-2 border-black'>
             <tr>
-              <td colSpan="5" className="text-center">Is Loading</td>
+              <th className='p-3 text-sm font-semibold tracking-wide text-left'>Checkbox</th>
+              <th className='p-3 text-sm font-semibold tracking-wide text-left'>To Do</th>
+              <th className='p-3 text-sm font-semibold tracking-wide text-left'>Status</th>
+              <th className='p-3 text-sm font-semibold tracking-wide text-left'>Date Created</th>
+              <th className='p-3 text-sm font-semibold tracking-wide text-left'>Actions</th>
             </tr>
-          ) : (
-            todo.map((todoItem) => (
-              <tr key={todoItem.id} className='border-b border-black'>
-                <td className='p-3 text-sm' title={todoItem.id}>
-                  <span onClick={() => handleCheckbox(todoItem.id, todoItem.completed)} className='inline-block cursor-pointer'>
-                    {todoItem.completed ? <MdOutlineCheckBox /> : <MdOutlineCheckBoxOutlineBlank />}
-                  </span>
-                </td>
-                <td className='p-3 text-sm'>{todoItem.body}</td>
-                <td className='p-3 text-sm text-center'>
-                  <span className={`p-1.5 text-xs font-medium tracking-wider rounded-md ${todoItem.completed ? 'bg-green-300' : 'bg-red-300'}`}>
-                    {todoItem.completed ? 'Done' : 'Incomplete'}
-                  </span>
-                </td>
-                <td className='p-3 text-sm'>{new Date(todoItem.created).toLocaleString()}</td>
-                <td className='p-3 text-sm font-medium grid grid-flow-col items-center mt-5'>
-                  <span className='text-xl cursor-pointer'>
-                    <label htmlFor="my_modal_6" className="btn" onClick={() => setEditText(todoItem)}><MdEditNote /></label>
-                  </span>
-                  <span className='text-xl inline-block cursor-pointer'><MdOutlineDeleteSweep onClick={() => handleDelete(todoItem.id)} /></span>
-                </td>
+          </thead>
+          <tbody>
+            {isLoading ? (
+              <tr>
+                <td colSpan="5" className="text-center">Is Loading</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              todo.map((todoItem) => (
+                <tr key={todoItem.id} className='border-b border-black'>
+                  <td className='p-3 text-sm' title={todoItem.id}>
+                    <span onClick={() => handleCheckbox(todoItem.id, todoItem.completed)} className='inline-block cursor-pointer'>
+                      {todoItem.completed ? <MdOutlineCheckBox /> : <MdOutlineCheckBoxOutlineBlank />}
+                    </span>
+                  </td>
+                  <td className='p-3 text-sm'>{todoItem.body}</td>
+                  <td className='p-3 text-sm text-center'>
+                    <span className={`p-1.5 text-xs font-medium tracking-wider rounded-md ${todoItem.completed ? 'bg-green-300' : 'bg-red-300'}`}>
+                      {todoItem.completed ? 'Done' : 'Incomplete'}
+                    </span>
+                  </td>
+                  <td className='p-3 text-sm'>{new Date(todoItem.created).toLocaleString()}</td>
+                  <td className='p-3 text-sm font-medium flex space-x-2'>
+                    <span className='text-xl cursor-pointer'>
+                      <label htmlFor="my_modal_6" className="btn" onClick={() => setEditText(todoItem)}><MdEditNote /></label>
+                    </span>
+                    <span className='text-xl cursor-pointer'><MdOutlineDeleteSweep onClick={() => handleDelete(todoItem.id)} /></span>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
 
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal" role="dialog">
